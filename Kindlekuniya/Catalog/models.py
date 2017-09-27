@@ -1,27 +1,27 @@
 from django.db import models
 
 class Product(models.Model):
-    isbn = DecimalField(unique = True, max_digits = 13, decimal_places = 0)
-    name = CharField(max_length = 250)
-    author = CharField(max_length = 250)
-    publisher = CharField(max_length = 250)
-    price = FloatField()
-    weight = FloatField()
-    isMonocrome = BooleanField(default = True)
-    paperType = CharField(max_length = 100)
-    coverType = CharField(max_length = 100)
-    size_height = FloatField()
-    size_width = FloatField()
-    size_thickness = FloatField()
-    description = TextField()
-    pictureUrl = CharField(max_length = 500)
+    isbn = models.DecimalField(max_digits = 13, decimal_places = 0, unique = True)
+    name = models.CharField(max_length = 250)
+    author = models.CharField(max_length = 250)
+    publisher = models.CharField(max_length = 250)
+    price = models.FloatField()
+    weight = models.FloatField()
+    isMonocrome = models.BooleanField(default = True)
+    paperType = models.CharField(max_length = 100)
+    coverType = models.CharField(max_length = 100)
+    size_height = models.FloatField()
+    size_width = models.FloatField()
+    size_thickness = models.FloatField()
+    description = models.TextField()
+    pictureUrl = models.CharField(max_length = 500)
 
     def __str__(self):
         return self.name
 
 class Catagory(models.Model):
-    name = CharField(max_length = 100)
-    description = TextField()
+    name = models.CharField(max_length = 100)
+    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class CatagoryMap(models.Model):
 
 class Stock(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, unique = True)
-    quantity = PositiveIntegerField()
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return str(self.product) + " - " + str(self.quantity)
