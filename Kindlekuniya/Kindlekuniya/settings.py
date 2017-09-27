@@ -76,9 +76,7 @@ WSGI_APPLICATION = 'Kindlekuniya.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'kindlekuniyadb',
         'USER': 'root',
-        'PASSWORD': 'kindlekuniya',
         'HOST': '',
         'PORT': ''
     }
