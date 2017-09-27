@@ -34,7 +34,7 @@ class CatagoryMap(models.Model):
         return str(self.catagory) + " - " + str(self.product)
 
 class Stock(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, unique = True)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
     def __str__(self):
