@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.sites.models import Site
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^catalog/', include('Catalog.urls')),
+    url(r'^accounts/', include('allauth.urls')),
 ]
