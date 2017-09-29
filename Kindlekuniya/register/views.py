@@ -1,20 +1,24 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
 from .models import userProfile
+from django.db import connection
+from .forms import userProfileForm, userSigninForm
+from .models import userProfileModel,userProfile
 
-def signup(req):
-    if(req.method == 'POST'):
-        firstName = req.POST['firstName']
-        lastName = req.POST['lastName']
-        email = req.POST['email']
-        password = req.POST['password']
-        phoneNO = req.POST['phoneNO']
-        user_Profile = userProfile(email=email,firstName=firstName,lastName=lastName,password=password,phoneNO=phoneNO)
-        user_Profile.save()
-        return render(req,"signup.html")
+def signup(request):
+    if request.method == 'POST':
+        form = userProfileForm(request.POST)
+        if form.is_valid():
+            form = userProfileModel(request.POST)        
+            form.save()
+
+            return render(request, "signup.html")
+
     else:
-        return render(req,"signup.html")
+        form = userProfileForm()
+    return render(request, 'signup.html', {'form': form})
+
+
 
 def home(request):
-    return render(request,'home.html')
+    return render(request, 'home.html')
