@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 # Create your models here.
-class userProfile(models.Model):
+class User(models.Model):
     userID = models.AutoField(primary_key=True,default=None)
     email = models.EmailField(max_length=120,default=None,unique=True)
     firstName = models.CharField(max_length=120,default=None)
@@ -12,7 +12,7 @@ class userProfile(models.Model):
         return self.email
 
 
-class userProfileModel(ModelForm):
+class signupModelForm(ModelForm):
     class Meta:
-        model = userProfile
+        model = User
         fields = ['email', 'firstName','lastName','password','phoneNO']
