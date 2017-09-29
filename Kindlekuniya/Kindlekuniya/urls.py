@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^signup/$', register_views.signup, name='signup'),
     url(r'^signin/$', register_views.signin, name='signin'),
-    url(r'^home/$', register_views.home, name='home'),
+    url(r'^profile/$', register_views.profile, name='profile'),
 ]
