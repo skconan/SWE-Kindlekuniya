@@ -1,45 +1,7 @@
-<h2>Sign up</h2>
-<script>
-    var checkConfirmPassword = function () {
-        if (document.getElementById('password').value ==
-            document.getElementById('confirm_password').value) {
-            document.getElementById('error_password').style.color = 'green';
-            document.getElementById('error_password').innerHTML = 'matching';
-        } else {
-            document.getElementById('error_password').style.color = 'red';
-            document.getElementById('error_password').innerHTML = 'not matching';
-        }
-    }
-    var checkPhoneNumber = function () {
-        var phoneno = /^\d{10}$/;          
-        if (phoneNO.value.match(phoneno)) {
-            document.getElementById('error_phoneNO').innerHTML = 'true';
-        }else{
-            document.getElementById('error_phoneNO').innerHTML = 'false';
-        }
-    }
-   
 
-</script>
-<form action="{% url 'signup' %}" method="post">
+  <h2>Sign up</h2>
+  <form method="post">
     {% csrf_token %}
-    <label for="firstname">Firstname</label><br />
-    <input type="text" name="firstName"><br>
-    <br>
-    <label for="lastname">Lastname</label><br />
-    <input type="text" name="lastName"><br>
-    <br>
-    <label for="email">Email</label><br />
-    <input type="text" name="email"><br>
-    <br>
-    <label for="phoneNO">Phone Number</label><br />
-    <input type="text" name="phoneNO" id="phoneNO" onkeyup="checkPhoneNumber()"><span id='error_phoneNO' ></span><br>
-    <label for="password">password</label><br />
-    <input type="password" name="password" id="password" onkeyup='checkConfirmPassword()' /><br />
-    <label for="password">Confirm password</label><br />
-    <input type="password" name="confirm_password" id="confirm_password" onkeyup='checkConfirmPassword()' /><span id='error_password'></span>
-    <br>
-    <br>
-    <input type="submit" value="Submit" />
-</form>
-<br>
+    {{ form.as_p }}
+    <button type="submit">Sign up</button>
+  </form>
