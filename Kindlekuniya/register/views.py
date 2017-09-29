@@ -19,6 +19,15 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+def signin(request):
+    if request.method == 'POST':
+        form = userSigninForm(request.POST)
+        if form.is_valid() and userProfile.objects.filter(email=request.POST['email']).filter(password=request.POST['password']):
+            return render(request, "home.html")
+    else:
+        form = userSigninForm()
+    return render(request, 'signin.html', {'form': form})
+
 
 def home(request):
     return render(request, 'home.html')
