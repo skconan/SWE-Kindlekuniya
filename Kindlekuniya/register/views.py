@@ -19,12 +19,17 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         form = signinForm(request.POST)
-        if form.is_valid() and User.objects.filter(email=request.POST['email']).filter(password=request.POST['password']):
-            return render(request, "home.html")
+        email = request.POST['email']
+        password = request.POST['password']
+        isMatch = User.objects.filter(email=email).filter(password=password)
+        if form.is_valid() and isMatch:
+            user = User.objects.get(email=email)
+            context = {'user':user}
+            return render(request, "profile.html",context)
     else:
         form = signinForm()
     return render(request, 'signin.html', {'form': form})
 
 
-def home(request):
-    return render(request, 'home.html')
+def profile(request):
+    return render(request, 'profile.html')
