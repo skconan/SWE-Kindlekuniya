@@ -29,7 +29,7 @@ def signin(request):
             return redirect("/profile")
     else:
         form = signinForm()
-        return render(request, 'signin.html', {'form': form})
+    return render(request, 'signin.html', {'form': form})
 
 # def logout(request):
 
@@ -46,4 +46,4 @@ def profile(request):
         except:
             pass
         form = signinForm()
-        return render(request, 'signin.html', {'form': form})
+        return redirect("/signin")
