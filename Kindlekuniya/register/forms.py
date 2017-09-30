@@ -8,6 +8,8 @@ class signupForm(forms.Form):
     firstname = forms.CharField(required=True, max_length=128)
     lastname = forms.CharField(required=True, max_length=128)
     password = forms.CharField(
+
+
         required=True, min_length=8, max_length=128, widget=forms.PasswordInput)
     confirm_password = forms.CharField(
         required=True, max_length=128, widget=forms.PasswordInput)
@@ -15,6 +17,7 @@ class signupForm(forms.Form):
         regex='^[0-9]*$', message='Phone number must be numeric 0-9 and length is 10'), ])
 
     def clean_confirm_password(self):
+
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('confirm_password')
 
@@ -22,7 +25,7 @@ class signupForm(forms.Form):
             raise forms.ValidationError("Passwords don't match")
 
         return self.cleaned_data
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email):
