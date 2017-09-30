@@ -27,14 +27,8 @@ class signupForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email):
-            raise forms.ValidationError("Email don't unique")
+            raise forms.ValidationError("Email is already taken")
         return self.cleaned_data
-
-
-    def clean_password(self):
-        password = self.cleaned_data.get('password')
-        # if password
-        pass
 
 
 class signinForm(forms.Form):

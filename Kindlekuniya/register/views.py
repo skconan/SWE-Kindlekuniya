@@ -25,15 +25,25 @@ def signin(request):
         if form.is_valid() and isMatch:
             user = User.objects.get(email=email)
             request.session['userID'] = user.userID
-            context = {'user':user}
-            return render(request, "profile.html",context)
+            request.session.set_expiry(1800)  
+            return redirect("/profile")
     else:
         form = signinForm()
-    return render(request, 'signin.html', {'form': form})
+        return render(request, 'signin.html', {'form': form})
+
+# def logout(request):
 
 
 def profile(request):
-    # if request.session.has_key('userID'):
-    #     username = request.session['username']
-    #     return render(request, 'loggedin.html', {"username" : username})
-    return render(request, 'profile.html')
+    if request.session.has_key('userID'):
+        userID = request.session['userID']
+        user = User.objects.get(userID=userID)
+        context = {'user':user}
+        return render(request, "profile.html",context)
+    else:
+        try:
+            del request.session['username']
+        except:
+            pass
+        form = signinForm()
+        return render(request, 'signin.html', {'form': form})
