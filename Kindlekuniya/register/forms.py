@@ -8,12 +8,11 @@ class signupForm(forms.Form):
     firstName = forms.CharField(required=True, max_length=128)
     lastName = forms.CharField(required=True, max_length=128)
     password = forms.CharField(
-        required=True, max_length=128, widget=forms.PasswordInput)
+        required=True, max_length=128, widget=forms.PasswordInput, validators=[RegexValidator(regex=r'^[0-9a-zA-Z]*$')])
     confirmPassword = forms.CharField(
-        required=True, max_length=128, widget=forms.PasswordInput)
+        required=True, max_length=128, widget=forms.PasswordInput, validators=[RegexValidator(regex=r'^[0-9a-zA-Z]*$')])
     phoneNO = forms.CharField(required=True, max_length=10, min_length=10, validators=[RegexValidator(
         regex='^[0-9]*$', message='Phone number must be numeric 0-9 and length is 10'), ])
-
     def clean(self):
         password1 = self.cleaned_data.get('password')
         password2 = self.cleaned_data.get('confirmPassword')
