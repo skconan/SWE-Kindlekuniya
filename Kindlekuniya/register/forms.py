@@ -8,9 +8,7 @@ class signupForm(forms.Form):
     firstname = forms.CharField(required=True, max_length=128)
     lastname = forms.CharField(required=True, max_length=128)
     password = forms.CharField(
-
-
-        required=True, min_length=8, max_length=128, widget=forms.PasswordInput)
+        required=True, min_length=8, max_length=128, widget=forms.PasswordInput, validators=[RegexValidator(regex='^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$', message ='Password must contain at least one alphabet and one digit')])
     confirm_password = forms.CharField(
         required=True, max_length=128, widget=forms.PasswordInput)
     phone_number = forms.CharField(required=True, max_length=10, min_length=10, validators=[RegexValidator(
@@ -31,9 +29,9 @@ class signupForm(forms.Form):
         if User.objects.filter(email=email):
             raise forms.ValidationError("Email don't unique")
         return self.cleaned_data
-        
-    
-    def clean_password(self):   
+
+
+    def clean_password(self):
         password = self.cleaned_data.get('password')
         # if password
         pass
