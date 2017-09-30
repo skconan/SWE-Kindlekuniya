@@ -24,6 +24,7 @@ def signin(request):
         isMatch = User.objects.filter(email=email).filter(password=password)
         if form.is_valid() and isMatch:
             user = User.objects.get(email=email)
+            request.session['userID'] = user.userID
             context = {'user':user}
             return render(request, "profile.html",context)
     else:
@@ -32,4 +33,7 @@ def signin(request):
 
 
 def profile(request):
+    # if request.session.has_key('userID'):
+    #     username = request.session['username']
+    #     return render(request, 'loggedin.html', {"username" : username})
     return render(request, 'profile.html')
